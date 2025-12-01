@@ -2,8 +2,8 @@ pub fn generator(input: &str) -> Vec<i64> {
     input
         .lines()
         .map(|line| {
-            line.replace("L", "-")
-                .replace("R", "")
+            line.replace('L', "-")
+                .replace('R', "")
                 .parse()
                 .unwrap_or_default()
         })
@@ -33,15 +33,15 @@ pub fn part_2(input: &[i64]) -> i64 {
         let raw_value = value + change;
         value = raw_value.rem_euclid(100);
 
-        if raw_value == 0 {
-            count += 1;
-        } else if raw_value > 0 {
-            count += raw_value / 100;
-        } else if raw_value < 0 {
-            count += (raw_value / 100).abs();
-            if raw_value != *change {
-                count += 1;
-            }
+        match raw_value.cmp(&0) {
+            std::cmp::Ordering::Less => {
+                count += (raw_value / 100).abs();
+                if raw_value != *change {
+                    count += 1;
+                }
+            },
+            std::cmp::Ordering::Equal => count += 1,
+            std::cmp::Ordering::Greater => count += raw_value / 100,
         }
     }
 
