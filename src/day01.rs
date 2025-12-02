@@ -39,7 +39,7 @@ pub fn part_2(input: &[i64]) -> i64 {
                 if raw_value != *change {
                     count += 1;
                 }
-            },
+            }
             std::cmp::Ordering::Equal => count += 1,
             std::cmp::Ordering::Greater => count += raw_value / 100,
         }
