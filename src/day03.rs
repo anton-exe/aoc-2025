@@ -1,4 +1,8 @@
-pub fn generator(input: &str) -> Vec<Vec<u64>> {
+pub fn generator(input: &str) -> &str {
+    input
+}
+
+pub fn part_1(input: &str) -> u64 {
     input
         .lines()
         .map(|line| {
@@ -7,11 +11,7 @@ pub fn generator(input: &str) -> Vec<Vec<u64>> {
                 .map(|number| u64::from(number - 48))
                 .collect()
         })
-        .collect()
-}
-
-pub fn part_1(input: &[Vec<u64>]) -> u64 {
-    input
+        .collect::<Vec<Vec<u64>>>()
         .iter()
         .map(|line| {
             line[..line.len() - 1].iter().max().unwrap() * 10
@@ -27,9 +27,17 @@ pub fn part_1(input: &[Vec<u64>]) -> u64 {
         .sum()
 }
 
-pub fn part_1_but_like_part_2(input: &[Vec<u64>]) -> u64 {
+pub fn part_1_but_like_part_2(input: &str) -> u64 {
     const DIGITS: usize = 2;
     input
+        .lines()
+        .map(|line| {
+            line.as_bytes()
+                .iter()
+                .map(|number| u64::from(number - 48))
+                .collect()
+        })
+        .collect::<Vec<Vec<u64>>>()
         .iter()
         .map(|line| {
             let mut nums = line.clone();
@@ -50,9 +58,17 @@ pub fn part_1_but_like_part_2(input: &[Vec<u64>]) -> u64 {
         .sum()
 }
 
-pub fn part_2(input: &[Vec<u64>]) -> u64 {
+pub fn part_2(input: &str) -> u64 {
     const DIGITS: usize = 12;
     input
+        .lines()
+        .map(|line| {
+            line.as_bytes()
+                .iter()
+                .map(|number| u64::from(number - 48))
+                .collect()
+        })
+        .collect::<Vec<Vec<u64>>>()
         .iter()
         .map(|line| {
             let mut nums = line.clone();
